@@ -8,7 +8,6 @@ Created on Sat May 26 17:58:32 2018
 import pandas as pd
 import numpy as np
 import psycopg2
-import geopandas as gpd
 
 import dash
 from dash.dependencies import Input, Output
@@ -71,10 +70,11 @@ app.layout = html.Div([
          html.Br(),
          html.Div(id='subcat-dropdown', style={'width':'50%'}),
          dcc.Graph(
-             id = "mapbox",
-             figure={},
-             style = {"height": "100vh"}
-      )
+               id = "mapbox",
+               figure={},
+               style = {"height": "100vh"}
+         )
+         
    ], style={'padding': '0px 10px 15px 10px',
              'marginLeft': 'auto', 'marginRight': 'auto', "width": "900px",
              'boxShadow': '0px 0px 5px 5px rgba(204,204,204,0.4)'})
@@ -131,8 +131,6 @@ def update_graph(category):
                  )
             }
    return figure 
-
-
 
 if __name__ == '__main__':
    app.run_server()
