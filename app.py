@@ -32,7 +32,7 @@ app.css.append_css({'external_url': 'https://github.com/sapkos/hackathon_app/blo
 app.css.append_css({'external_url': 'https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css'})
 
 app.config.supress_callback_exceptions=True
-categories = dict(Cat_1=['Restauracje','FastFood','c'], Cat_2=['uslugi_medyczne','e','f'], Cat_3=['Przedszkola','h','e'])
+categories = dict(Cat_1=['Restauracje','FastFood'], Cat_2=['uslugi_medyczne','Sklep'], Cat_3=['Przedszkola','Hazard'])
 
 n_clicks = [0,0,0]
 colors = ['#ff5454', '#ffff54', '#eeff00', '#8fff54', '#00ff19']
@@ -102,7 +102,6 @@ def update_output(cat1, cat2, cat3):
               [Input('subcat-dropdown-dropdown', 'value')])
 def update_graph(category):
    pred = pd.read_csv(category+'_xy.csv')
-   lin = [np.percentile(pred.pred.values, q) for q in np.linspace(0,100,5)]
    figure = {
                  "data": [go.Scattermapbox(
                  lat=pred[pred['digits']==i]['grid_y'].values,
@@ -113,7 +112,7 @@ def update_graph(category):
                      opacity=i/(3*pred['digits'].max()),
                      color=colors[i]
                  ),
-                 text=lin[i]  
+                 text='Grupa_{}'.format(i)  
                  ) for i in range(0, 5)],
                  "layout": dict(
                      autosize = True,
@@ -123,7 +122,7 @@ def update_graph(category):
                          accesstoken = 'pk.eyJ1Ijoic3p5bWVrazk1IiwiYSI6ImNqZ3BqcHN6ZjJ0dngycW84OGZnaHdoaGMifQ.xVWsCrwXz-6qYX5MYJjmoQ',
                          bearing = 0,
                          pitch = 0,
-                         zoom=11,
+                         zoom=12,
                          center=dict(
                                lat=50.062204,
                                lon=19.938160
